@@ -1,6 +1,6 @@
 //
 //  ContentView.swift
-//  Constellation
+//  Ursa
 //
 //  Created by aydar.media on 22.07.2023.
 //

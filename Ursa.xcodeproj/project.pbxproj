@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		FCBD98772A6BE0040036E418 /* ConstellationApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCBD98762A6BE0040036E418 /* ConstellationApp.swift */; };
+		FCBD98772A6BE0040036E418 /* UrsaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCBD98762A6BE0040036E418 /* UrsaApp.swift */; };
 		FCBD98792A6BE0040036E418 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCBD98782A6BE0040036E418 /* ContentView.swift */; };
 		FCBD987B2A6BE0050036E418 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FCBD987A2A6BE0050036E418 /* Assets.xcassets */; };
 		FCBD987E2A6BE0050036E418 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FCBD987D2A6BE0050036E418 /* Preview Assets.xcassets */; };
@@ -55,12 +55,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		FCBD98732A6BE0040036E418 /* Constellation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Constellation.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		FCBD98762A6BE0040036E418 /* ConstellationApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstellationApp.swift; sourceTree = "<group>"; };
+		FCBD98732A6BE0040036E418 /* Ursa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ursa.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		FCBD98762A6BE0040036E418 /* UrsaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrsaApp.swift; sourceTree = "<group>"; };
 		FCBD98782A6BE0040036E418 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		FCBD987A2A6BE0050036E418 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FCBD987D2A6BE0050036E418 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		FCBD987F2A6BE0050036E418 /* Constellation.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Constellation.entitlements; sourceTree = "<group>"; };
+		FCBD987F2A6BE0050036E418 /* Ursa.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Ursa.entitlements; sourceTree = "<group>"; };
 		FCBD98892A6BE0510036E418 /* WidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = WidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCBD988B2A6BE0510036E418 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		FCBD988D2A6BE0510036E418 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
@@ -99,7 +99,7 @@
 		FCBD986A2A6BE0040036E418 = {
 			isa = PBXGroup;
 			children = (
-				FCBD98752A6BE0040036E418 /* Constellation */,
+				FCBD98752A6BE0040036E418 /* Ursa */,
 				FCBD988F2A6BE0510036E418 /* Widget */,
 				FCBD988A2A6BE0510036E418 /* Frameworks */,
 				FCBD98742A6BE0040036E418 /* Products */,
@@ -109,24 +109,24 @@
 		FCBD98742A6BE0040036E418 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				FCBD98732A6BE0040036E418 /* Constellation.app */,
+				FCBD98732A6BE0040036E418 /* Ursa.app */,
 				FCBD98892A6BE0510036E418 /* WidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		FCBD98752A6BE0040036E418 /* Constellation */ = {
+		FCBD98752A6BE0040036E418 /* Ursa */ = {
 			isa = PBXGroup;
 			children = (
 				FCBD98AB2A6C66640036E418 /* Styles */,
 				FCBD989E2A6C60AC0036E418 /* Views */,
-				FCBD98762A6BE0040036E418 /* ConstellationApp.swift */,
+				FCBD98762A6BE0040036E418 /* UrsaApp.swift */,
 				FCBD98782A6BE0040036E418 /* ContentView.swift */,
 				FCBD987A2A6BE0050036E418 /* Assets.xcassets */,
-				FCBD987F2A6BE0050036E418 /* Constellation.entitlements */,
+				FCBD987F2A6BE0050036E418 /* Ursa.entitlements */,
 				FCBD987C2A6BE0050036E418 /* Preview Content */,
 			);
-			path = Constellation;
+			path = Ursa;
 			sourceTree = "<group>";
 		};
 		FCBD987C2A6BE0050036E418 /* Preview Content */ = {
@@ -188,9 +188,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		FCBD98722A6BE0040036E418 /* Constellation */ = {
+		FCBD98722A6BE0040036E418 /* Ursa */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = FCBD98822A6BE0050036E418 /* Build configuration list for PBXNativeTarget "Constellation" */;
+			buildConfigurationList = FCBD98822A6BE0050036E418 /* Build configuration list for PBXNativeTarget "Ursa" */;
 			buildPhases = (
 				FCBD986F2A6BE0040036E418 /* Sources */,
 				FCBD98702A6BE0040036E418 /* Frameworks */,
@@ -202,9 +202,9 @@
 			dependencies = (
 				FCBD98972A6BE0520036E418 /* PBXTargetDependency */,
 			);
-			name = Constellation;
+			name = Ursa;
 			productName = Constellation;
-			productReference = FCBD98732A6BE0040036E418 /* Constellation.app */;
+			productReference = FCBD98732A6BE0040036E418 /* Ursa.app */;
 			productType = "com.apple.product-type.application";
 		};
 		FCBD98882A6BE0510036E418 /* WidgetExtension */ = {
@@ -242,7 +242,7 @@
 					};
 				};
 			};
-			buildConfigurationList = FCBD986E2A6BE0040036E418 /* Build configuration list for PBXProject "Constellation" */;
+			buildConfigurationList = FCBD986E2A6BE0040036E418 /* Build configuration list for PBXProject "Ursa" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -255,7 +255,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				FCBD98722A6BE0040036E418 /* Constellation */,
+				FCBD98722A6BE0040036E418 /* Ursa */,
 				FCBD98882A6BE0510036E418 /* WidgetExtension */,
 			);
 		};
@@ -288,7 +288,7 @@
 			files = (
 				FCBD98792A6BE0040036E418 /* ContentView.swift in Sources */,
 				FCBD98A02A6C60BB0036E418 /* CarTitleView.swift in Sources */,
-				FCBD98772A6BE0040036E418 /* ConstellationApp.swift in Sources */,
+				FCBD98772A6BE0040036E418 /* UrsaApp.swift in Sources */,
 				FCBD98A92A6C64D60036E418 /* CarImageView.swift in Sources */,
 				FCBD98B32A6C75CF0036E418 /* TextStyles.swift in Sources */,
 				FCBD98A62A6C62540036E418 /* CarStatusView.swift in Sources */,
@@ -441,11 +441,11 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = Constellation/Constellation.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Ursa/Ursa.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Constellation/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Ursa/Preview Content\"";
 				DEVELOPMENT_TEAM = 9Q6UB3UBW7;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -456,7 +456,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.aydarmedia.constellation;
+				PRODUCT_BUNDLE_IDENTIFIER = com.aydarmedia.ursa;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -469,11 +469,11 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = Constellation/Constellation.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Ursa/Ursa.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Constellation/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Ursa/Preview Content\"";
 				DEVELOPMENT_TEAM = 9Q6UB3UBW7;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -484,7 +484,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.aydarmedia.constellation;
+				PRODUCT_BUNDLE_IDENTIFIER = com.aydarmedia.ursa;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -512,7 +512,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.aydarmedia.constellation.widget;
+				PRODUCT_BUNDLE_IDENTIFIER = com.aydarmedia.ursa.widget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -541,7 +541,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.aydarmedia.constellation.widget;
+				PRODUCT_BUNDLE_IDENTIFIER = com.aydarmedia.ursa.widget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -552,7 +552,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		FCBD986E2A6BE0040036E418 /* Build configuration list for PBXProject "Constellation" */ = {
+		FCBD986E2A6BE0040036E418 /* Build configuration list for PBXProject "Ursa" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				FCBD98802A6BE0050036E418 /* Debug */,
@@ -561,7 +561,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		FCBD98822A6BE0050036E418 /* Build configuration list for PBXNativeTarget "Constellation" */ = {
+		FCBD98822A6BE0050036E418 /* Build configuration list for PBXNativeTarget "Ursa" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				FCBD98832A6BE0050036E418 /* Debug */,
