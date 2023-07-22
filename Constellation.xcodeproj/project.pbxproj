@@ -16,6 +16,18 @@
 		FCBD98912A6BE0510036E418 /* Widget.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCBD98902A6BE0510036E418 /* Widget.swift */; };
 		FCBD98932A6BE0520036E418 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FCBD98922A6BE0520036E418 /* Assets.xcassets */; };
 		FCBD98982A6BE0520036E418 /* WidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = FCBD98892A6BE0510036E418 /* WidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		FCBD98A02A6C60BB0036E418 /* CarTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCBD989F2A6C60BB0036E418 /* CarTitleView.swift */; };
+		FCBD98A12A6C60BB0036E418 /* CarTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCBD989F2A6C60BB0036E418 /* CarTitleView.swift */; };
+		FCBD98A62A6C62540036E418 /* CarStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCBD98A52A6C62540036E418 /* CarStatusView.swift */; };
+		FCBD98A72A6C62540036E418 /* CarStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCBD98A52A6C62540036E418 /* CarStatusView.swift */; };
+		FCBD98A92A6C64D60036E418 /* CarImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCBD98A82A6C64D60036E418 /* CarImageView.swift */; };
+		FCBD98AA2A6C64D60036E418 /* CarImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCBD98A82A6C64D60036E418 /* CarImageView.swift */; };
+		FCBD98AD2A6C66830036E418 /* HStackStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCBD98AC2A6C66830036E418 /* HStackStyles.swift */; };
+		FCBD98AE2A6C66830036E418 /* HStackStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCBD98AC2A6C66830036E418 /* HStackStyles.swift */; };
+		FCBD98B02A6C752C0036E418 /* CarMetricView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCBD98AF2A6C752C0036E418 /* CarMetricView.swift */; };
+		FCBD98B12A6C752C0036E418 /* CarMetricView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCBD98AF2A6C752C0036E418 /* CarMetricView.swift */; };
+		FCBD98B32A6C75CF0036E418 /* TextStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCBD98B22A6C75CF0036E418 /* TextStyles.swift */; };
+		FCBD98B42A6C75CF0036E418 /* TextStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCBD98B22A6C75CF0036E418 /* TextStyles.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +68,12 @@
 		FCBD98922A6BE0520036E418 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FCBD98942A6BE0520036E418 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FCBD98952A6BE0520036E418 /* Widget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Widget.entitlements; sourceTree = "<group>"; };
+		FCBD989F2A6C60BB0036E418 /* CarTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarTitleView.swift; sourceTree = "<group>"; };
+		FCBD98A52A6C62540036E418 /* CarStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarStatusView.swift; sourceTree = "<group>"; };
+		FCBD98A82A6C64D60036E418 /* CarImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarImageView.swift; sourceTree = "<group>"; };
+		FCBD98AC2A6C66830036E418 /* HStackStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HStackStyles.swift; sourceTree = "<group>"; };
+		FCBD98AF2A6C752C0036E418 /* CarMetricView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarMetricView.swift; sourceTree = "<group>"; };
+		FCBD98B22A6C75CF0036E418 /* TextStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextStyles.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +118,8 @@
 		FCBD98752A6BE0040036E418 /* Constellation */ = {
 			isa = PBXGroup;
 			children = (
+				FCBD98AB2A6C66640036E418 /* Styles */,
+				FCBD989E2A6C60AC0036E418 /* Views */,
 				FCBD98762A6BE0040036E418 /* ConstellationApp.swift */,
 				FCBD98782A6BE0040036E418 /* ContentView.swift */,
 				FCBD987A2A6BE0050036E418 /* Assets.xcassets */,
@@ -130,11 +150,39 @@
 			isa = PBXGroup;
 			children = (
 				FCBD98902A6BE0510036E418 /* Widget.swift */,
+				FCBD989D2A6C60260036E418 /* Views */,
 				FCBD98922A6BE0520036E418 /* Assets.xcassets */,
 				FCBD98942A6BE0520036E418 /* Info.plist */,
 				FCBD98952A6BE0520036E418 /* Widget.entitlements */,
 			);
 			path = Widget;
+			sourceTree = "<group>";
+		};
+		FCBD989D2A6C60260036E418 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		FCBD989E2A6C60AC0036E418 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				FCBD989F2A6C60BB0036E418 /* CarTitleView.swift */,
+				FCBD98A52A6C62540036E418 /* CarStatusView.swift */,
+				FCBD98A82A6C64D60036E418 /* CarImageView.swift */,
+				FCBD98AF2A6C752C0036E418 /* CarMetricView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		FCBD98AB2A6C66640036E418 /* Styles */ = {
+			isa = PBXGroup;
+			children = (
+				FCBD98AC2A6C66830036E418 /* HStackStyles.swift */,
+				FCBD98B22A6C75CF0036E418 /* TextStyles.swift */,
+			);
+			path = Styles;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -239,7 +287,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				FCBD98792A6BE0040036E418 /* ContentView.swift in Sources */,
+				FCBD98A02A6C60BB0036E418 /* CarTitleView.swift in Sources */,
 				FCBD98772A6BE0040036E418 /* ConstellationApp.swift in Sources */,
+				FCBD98A92A6C64D60036E418 /* CarImageView.swift in Sources */,
+				FCBD98B32A6C75CF0036E418 /* TextStyles.swift in Sources */,
+				FCBD98A62A6C62540036E418 /* CarStatusView.swift in Sources */,
+				FCBD98B02A6C752C0036E418 /* CarMetricView.swift in Sources */,
+				FCBD98AD2A6C66830036E418 /* HStackStyles.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -247,7 +301,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FCBD98AE2A6C66830036E418 /* HStackStyles.swift in Sources */,
+				FCBD98A12A6C60BB0036E418 /* CarTitleView.swift in Sources */,
+				FCBD98AA2A6C64D60036E418 /* CarImageView.swift in Sources */,
+				FCBD98B42A6C75CF0036E418 /* TextStyles.swift in Sources */,
+				FCBD98B12A6C752C0036E418 /* CarMetricView.swift in Sources */,
 				FCBD98912A6BE0510036E418 /* Widget.swift in Sources */,
+				FCBD98A72A6C62540036E418 /* CarStatusView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

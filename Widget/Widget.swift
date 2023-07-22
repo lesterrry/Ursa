@@ -43,7 +43,7 @@ struct Provider: TimelineProvider {
 struct WidgetEntryView : View {
     var entry: Provider.Entry
     
-    var carImageSource: NSImage {
+    var carImage: NSImage {
         if let path = entry.carImagePath, let image = NSImage(contentsOfFile: path) {
             return image
         } else {
@@ -52,17 +52,31 @@ struct WidgetEntryView : View {
     }
     
     var body: some View {
-        HStack {
-            Image(nsImage: carImageSource)
-                .resizable()
-                .scaledToFit()
-                .frame(width: 100, height: 100, alignment: .center)
-            
-            Text("AAA")
-                .font(.largeTitle)
-                .padding()
+        VStack(alignment: .leading, spacing: 2) {  // Top-level column
+            HStack {  // Horizontal flexbox with title & status
+                CarTitleView(content: "Cerato")
+                Spacer()
+                CarStatusView(status: .armed)
+            }
+            .hstackStyle()
+            CarMetricView(value: "365км", description: "запас")
+                .padding(.top, -20)
+                .offset(y: 20)
+            Spacer()
+            HStack(alignment: .bottom) {  // Car image and detailed stats
+                CarImageView(image: carImage)
+                Spacer()
+                VStack(spacing: 2) {
+                    ForEach(0..<5) { _ in
+                        CarMetricView(value: "50%", description: "топлива")
+                    }
+                }
+            }
+            .hstackStyle()
         }
-        .padding()
+        .padding(.horizontal, 16)
+        .padding(.top, 8)
+        .padding(.bottom, 12)
         .environment(\.colorScheme, .dark)
     }
 }
@@ -82,7 +96,16 @@ struct DefaultWidget: Widget {
         StaticConfiguration(kind: kind, provider: Provider()) { entry in
             WidgetEntryView(entry: entry)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .background(Color("WidgetBackground"))
+                .background(
+                    LinearGradient(
+                        stops: [
+                            Gradient.Stop(color: Color(red: 0.1, green: 0.1, blue: 0.1), location: 0.10),
+                            Gradient.Stop(color: Color(red: 0.05, green: 0.05, blue: 0.05), location: 0.85),
+                        ],
+                        startPoint: UnitPoint(x: 0.5, y: 0),
+                        endPoint: UnitPoint(x: 0.5, y: 1)
+                    )
+                )
         }
         .supportedFamilies(supportedFamilies)
         .configurationDisplayName("My Widget")
