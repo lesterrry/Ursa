@@ -8,10 +8,14 @@
 import WidgetKit
 import SwiftUI
 import Foundation
+import Constellation
+import os.log
 
 struct SimpleEntry: TimelineEntry {
     let date: Date
     let carImagePath: String? = nil
+    var carAlias: String? = nil
+    var doorsDesc: String? = nil
 }
 
 struct Provider: TimelineProvider {
@@ -20,27 +24,76 @@ struct Provider: TimelineProvider {
     }
     
     func getSnapshot(in context: Context, completion: @escaping (SimpleEntry) -> ()) {
-        let entry = SimpleEntry(date: Date())
-        completion(entry)
+        fetchCar() { data in
+            completion(data)
+        }
     }
     
     func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
         var entries: [SimpleEntry] = []
         
-        // Generate a timeline consisting of five entries an hour apart, starting from the current date.
-        let currentDate = Date()
-        for hourOffset in 0 ..< 5 {
-            let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
-            let entry = SimpleEntry(date: entryDate)
-            entries.append(entry)
+        fetchCar() { data in
+            entries.append(data)
         }
         
         let timeline = Timeline(entries: entries, policy: .atEnd)
         completion(timeline)
     }
+    
+    private func fetchCar(completion: @escaping (SimpleEntry) -> Void) {
+        os_log("Starting request....")
+        var car = SimpleEntry(date: Date())
+        guard
+            let appId = try? Keychain.getToken(account: KeychainEntity.Account.appId.rawValue),
+            let appSecret = try? Keychain.getToken(account: KeychainEntity.Account.appSecret.rawValue),
+            let userLogin = try? Keychain.getToken(account: KeychainEntity.Account.userLogin.rawValue),
+            let userPassword = try? Keychain.getToken(account: KeychainEntity.Account.userPassword.rawValue),
+            let deviceId = try? Keychain.getToken(account: KeychainEntity.Account.deviceId.rawValue)
+        else {
+            car.carAlias = "No Keychain"
+            completion(car); return
+        }
+        
+        let semaphore = DispatchSemaphore(value: 0)
+        DispatchQueue.global().async {
+            Task.init {
+                var fetchedCar = SimpleEntry(date: Date())
+                
+                var client = ApiClient(appId: appId, appSecret: appSecret, userLogin: userLogin, userPassword: userPassword)
+                guard client.hasUserToken else {
+                    fetchedCar.carAlias = "No User Token"
+                    completion(fetchedCar); return
+                }
+                
+                await client.auth() { result in
+                    if case .failure(_) = result {
+                        fetchedCar.carAlias = "Failed auth"
+                        completion(fetchedCar); return
+                    }
+                }
+                await client.getDeviceData(for: Int(deviceId)!) { result in
+                    switch result {
+                    case .failure(_):
+                        fetchedCar.carAlias = "Failed request"
+                        completion(fetchedCar); return
+                    case .success(let data):
+                        if case ApiResponse.Data.device(let device) = data {
+                            fetchedCar.carAlias = device.alias
+                            if let doors = device.state?.door { fetchedCar.doorsDesc = doors ? "откр." : "закр." }
+                            completion(fetchedCar); return
+                        } else {
+                            fetchedCar.carAlias = "Erroneous data"
+                            completion(fetchedCar); return
+                        }
+                    }
+                }
+                semaphore.signal()
+            }
+        }
+    }
 }
 
-struct WidgetEntryView : View {
+struct WidgetEntryView: View {
     var entry: Provider.Entry
     
     var carImage: NSImage {
@@ -54,12 +107,14 @@ struct WidgetEntryView : View {
     var body: some View {
         VStack(alignment: .leading, spacing: 2) {  // Top-level column
             HStack {  // Horizontal flexbox with title & status
-                CarTitleView(content: "Cerato")
+                CarTitleView(content: entry.carAlias ?? "Unknown")
                 Spacer()
                 CarStatusView(status: .armed)
             }
             .hstackStyle()
-            CarMetricView(value: "365км", description: "запас")
+//            var doorsDesc = "неизв."
+//            if let doors = entry.areDoorsOpen { doorsDesc = doors ? "откр." : "закр." }
+            CarMetricView(value: entry.doorsDesc, description: "двери")
                 .padding(.top, -20)
                 .offset(y: 20)
             Spacer()

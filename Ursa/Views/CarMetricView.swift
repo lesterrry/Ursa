@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct CarMetricView: View {
-    var value: String
+    var value: String?
     var description: String
     
     var body: some View {
         HStack(alignment: .bottom, spacing: 6) {
-            Text(value)
+            Text(value ?? "неизв.")
                 .textStyle(size: 14, weight: .medium)
             Text(description)
                 .foregroundColor(Color(red: 0.34, green: 0.34, blue: 0.34))
