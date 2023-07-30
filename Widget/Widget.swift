@@ -14,8 +14,7 @@ import os.log
 struct SimpleEntry: TimelineEntry {
     let date: Date
     let carImagePath: String? = nil
-    var carAlias: String? = nil
-    var doorsDesc: String? = nil
+    var carData: CarData = CarData()
 }
 
 struct Provider: TimelineProvider {
@@ -42,7 +41,7 @@ struct Provider: TimelineProvider {
     
     private func fetchCar(completion: @escaping (SimpleEntry) -> Void) {
         os_log("Starting request....")
-        var car = SimpleEntry(date: Date())
+        var entry = SimpleEntry(date: Date())
         guard
             let appId = try? Keychain.getToken(account: KeychainEntity.Account.appId.rawValue),
             let appSecret = try? Keychain.getToken(account: KeychainEntity.Account.appSecret.rawValue),
@@ -50,40 +49,48 @@ struct Provider: TimelineProvider {
             let userPassword = try? Keychain.getToken(account: KeychainEntity.Account.userPassword.rawValue),
             let deviceId = try? Keychain.getToken(account: KeychainEntity.Account.deviceId.rawValue)
         else {
-            car.carAlias = "No Keychain"
-            completion(car); return
+            entry.carData.alias = "No Keychain"
+            completion(entry); return
         }
         
         let semaphore = DispatchSemaphore(value: 0)
         DispatchQueue.global().async {
             Task.init {
-                var fetchedCar = SimpleEntry(date: Date())
+                var fetchedEntry = SimpleEntry(date: Date())
                 
                 var client = ApiClient(appId: appId, appSecret: appSecret, userLogin: userLogin, userPassword: userPassword)
                 guard client.hasUserToken else {
-                    fetchedCar.carAlias = "No User Token"
-                    completion(fetchedCar); return
+                    fetchedEntry.carData.alias = "No User Token"
+                    completion(fetchedEntry); return
                 }
                 
                 await client.auth() { result in
                     if case .failure(_) = result {
-                        fetchedCar.carAlias = "Failed auth"
-                        completion(fetchedCar); return
+                        fetchedEntry.carData.alias = "Failed auth"
+                        completion(fetchedEntry); return
                     }
                 }
                 await client.getDeviceData(for: Int(deviceId)!) { result in
                     switch result {
                     case .failure(_):
-                        fetchedCar.carAlias = "Failed request"
-                        completion(fetchedCar); return
+                        fetchedEntry.carData.alias = "Failed request"
+                        completion(fetchedEntry); return
                     case .success(let data):
                         if case ApiResponse.Data.device(let device) = data {
-                            fetchedCar.carAlias = device.alias
-                            if let doors = device.state?.door { fetchedCar.doorsDesc = doors ? "откр." : "закр." }
-                            completion(fetchedCar); return
+                            fetchedEntry.carData.alias = device.alias
+                            fetchedEntry.carData.doorsOpen = device.state?.door
+                            fetchedEntry.carData.hoodOpen = device.state?.hood
+                            fetchedEntry.carData.trunkOpen = device.state?.trunk
+                            fetchedEntry.carData.gpsLevel = device.common?.gpsLevel
+                            fetchedEntry.carData.gsmLevel = device.common?.gsmLevel
+                            fetchedEntry.carData.ignitionPowered = device.state?.ignition
+                            fetchedEntry.carData.remainingDistance = device.obd?.remainingDistance
+                            fetchedEntry.carData.batteryVoltage = device.common?.battery
+                            fetchedEntry.carData.parkingBrakeEngaged = device.state?.parkingBrake
+                            completion(fetchedEntry); return
                         } else {
-                            fetchedCar.carAlias = "Erroneous data"
-                            completion(fetchedCar); return
+                            fetchedEntry.carData.alias = "Erroneous data"
+                            completion(fetchedEntry); return
                         }
                     }
                 }
@@ -107,23 +114,28 @@ struct WidgetEntryView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 2) {  // Top-level column
             HStack {  // Horizontal flexbox with title & status
-                CarTitleView(content: entry.carAlias ?? "Unknown")
+                CarTitleView(content: entry.carData.alias ?? "Неизвестно")
                 Spacer()
                 CarStatusView(status: .armed)
             }
             .hstackStyle()
-//            var doorsDesc = "неизв."
-//            if let doors = entry.areDoorsOpen { doorsDesc = doors ? "откр." : "закр." }
-            CarMetricView(value: entry.doorsDesc, description: "двери")
+            CarMetricView(value: String(entry.carData.remainingDistance ?? 0), description: "км в баке")
                 .padding(.top, -20)
                 .offset(y: 20)
             Spacer()
             HStack(alignment: .bottom) {  // Car image and detailed stats
                 CarImageView(image: carImage)
                 Spacer()
-                VStack(spacing: 2) {
-                    ForEach(0..<5) { _ in
-                        CarMetricView(value: "50%", description: "топлива")
+                let metrics: [[String]] = [
+                    [String(entry.carData.batteryVoltage ?? 0), "вольт"],
+                    [entry.carData.$ignitionPowered, "зажигание"],
+                    [entry.carData.perimeter(), "периметр"],
+                    [entry.carData.gsmLevelDescription(), "gsm"],
+                    [entry.carData.$parkingBrakeEngaged, "ручник"],
+                ]
+                VStack(alignment: .leading, spacing: 2) {
+                    ForEach(metrics, id: \.self) { i in
+                        CarMetricView(value: i[0], description: i[1])
                     }
                 }
             }
