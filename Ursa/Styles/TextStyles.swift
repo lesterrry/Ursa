@@ -14,7 +14,7 @@ fileprivate struct TextStyle: ViewModifier {
     
     func body(content: Content) -> some View {
         content
-            .font(Font.custom("SF Mono", size: CGFloat(fontSize)).weight(fontWeight))
+            .font(Font.system(size: CGFloat(fontSize), weight: fontWeight, design: .monospaced))
             .foregroundColor(.white)
     }
 }

@@ -156,11 +156,7 @@ struct WidgetEntryView: View {
 struct DefaultWidget: Widget {
     let kind: String = "DefaultWidget"
     var supportedFamilies: [WidgetFamily] {
-#if DEBUG
-        [WidgetFamily.systemSmall, WidgetFamily.systemMedium, WidgetFamily.systemLarge]
-#else
-        [WidgetFamily.systemSmall]
-#endif
+        [WidgetFamily.systemMedium]
     }
     
     var body: some WidgetConfiguration {
@@ -179,8 +175,8 @@ struct DefaultWidget: Widget {
                 )
         }
         .supportedFamilies(supportedFamilies)
-        .configurationDisplayName("My Widget")
-        .description("This is an example widget.")
+        .configurationDisplayName("Моя машина")
+        .description("Как там дела у машинки")
     }
 }
 
