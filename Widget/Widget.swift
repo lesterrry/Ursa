@@ -87,6 +87,10 @@ struct Provider: TimelineProvider {
                             fetchedEntry.carData.remainingDistance = device.obd?.remainingDistance
                             fetchedEntry.carData.batteryVoltage = device.common?.battery
                             fetchedEntry.carData.parkingBrakeEngaged = device.state?.parkingBrake
+                            fetchedEntry.carData.isArmed = device.state?.arm
+                            fetchedEntry.carData.alarmTriggered = device.state?.alarm
+                            fetchedEntry.carData.valetModeOn = device.state?.valet
+                            fetchedEntry.carData.stayHomeModeOn = device.state?.stayHome
                             completion(fetchedEntry); return
                         } else {
                             fetchedEntry.carData.alias = "Erroneous data"
@@ -130,10 +134,10 @@ struct WidgetEntryView: View {
                     [String(entry.carData.batteryVoltage ?? 0), "вольт"],
                     [entry.carData.$ignitionPowered, "зажигание"],
                     [entry.carData.perimeter(), "периметр"],
-                    [entry.carData.gsmLevelDescription(), "gsm"],
+                    [entry.carData.gsmLevelDescription(), "gsm связь"],
                     [entry.carData.$parkingBrakeEngaged, "ручник"],
                 ]
-                VStack(alignment: .leading, spacing: 2) {
+                VStack(alignment: .trailing, spacing: 2) {
                     ForEach(metrics, id: \.self) { i in
                         CarMetricView(value: i[0], description: i[1])
                     }

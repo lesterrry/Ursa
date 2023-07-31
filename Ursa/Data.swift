@@ -23,12 +23,22 @@ public struct CarData {
     @DescriptiveBooleanState(trueDescription: "откр", falseDescription: "закр") public var hoodOpen: Bool? = nil
     @DescriptiveBooleanState(trueDescription: "откр", falseDescription: "закр") public var trunkOpen: Bool? = nil
     @DescriptiveBooleanState(trueDescription: "вкл", falseDescription: "выкл") public var ignitionPowered: Bool? = nil
+    @DescriptiveBooleanState(trueDescription: "вкл", falseDescription: "откл") public var isArmed: Bool? = nil
+    @DescriptiveBooleanState(trueDescription: "нет", falseDescription: "да") public var alarmTriggered: Bool? = nil
+    @DescriptiveBooleanState(trueDescription: "вкл", falseDescription: "выкл") public var valetModeOn: Bool? = nil
+    @DescriptiveBooleanState(trueDescription: "вкл", falseDescription: "выкл") public var stayHomeModeOn: Bool? = nil
     public var remainingDistance: Int? = nil
     public var batteryVoltage: Float? = nil
     public var gsmLevel: Float? = nil
     public var gpsLevel: Float? = nil
-    public var state: State? = nil
     
+    public func state() -> State? {
+        if self.alarmTriggered ?? false { return .alarm }
+        if self.valetModeOn ?? false { return .service }
+        if self.stayHomeModeOn ?? false { return .stayHome }
+        if let arm = self.isArmed { return arm ? .armed : .disarmed }
+        return .unknown
+    }
     public func perimeter() -> String {
         guard let doors = self.doorsOpen, let trunk = self.trunkOpen, let hood = self.hoodOpen else { return "неизв" }
         if !doors && !trunk && !hood { return "закр" }
