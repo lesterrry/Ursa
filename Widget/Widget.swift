@@ -40,7 +40,7 @@ struct Provider: TimelineProvider {
     }
     
     private func fetchCar(completion: @escaping (SimpleEntry) -> Void) {
-        os_log("Starting request....")
+        Logs.write("Starting request....")
         var entry = SimpleEntry(date: Date())
         guard
             let appId = try? Keychain.getToken(account: KeychainEntity.Account.appId.rawValue),

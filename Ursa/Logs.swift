@@ -13,7 +13,7 @@ public struct Logs {
         guard let downloadsDirectory = fileManager.urls(for: .downloadsDirectory, in: .userDomainMask).first else {
             return nil
         }
-        let logFileName = "YourAppName.log"
+        let logFileName = "Ursa.log"
         return downloadsDirectory.appendingPathComponent(logFileName)
     }
     
