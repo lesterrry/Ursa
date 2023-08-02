@@ -12,7 +12,7 @@ import Constellation
 import os.log
 
 struct SimpleEntry: TimelineEntry {
-    let date: Date
+    var date: Date
     let carImagePath: String? = nil
     var carData: CarData = CarData()
 }
@@ -29,15 +29,15 @@ struct Provider: TimelineProvider {
     }
     
     func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
-        var entries: [SimpleEntry] = []
-        
         fetchCar() { data in
-            entries.append(data)
+            let distantFuture = Calendar.current.date(byAdding: .year, value: 100, to: Date())!
+            var entry = data
+            entry.date = distantFuture
+            let timeline = Timeline(entries: [entry], policy: .atEnd)
+            completion(timeline)
         }
-        
-        let timeline = Timeline(entries: entries, policy: .atEnd)
-        completion(timeline)
     }
+
     
     private func fetchCar(completion: @escaping (SimpleEntry) -> Void) {
         Logs.write("Starting request....")
@@ -98,6 +98,7 @@ struct Provider: TimelineProvider {
                         }
                     }
                 }
+                Logs.write("Request finished. Battery: \(fetchedEntry.carData.batteryVoltage ?? 0)")
                 semaphore.signal()
             }
         }

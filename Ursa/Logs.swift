@@ -26,8 +26,9 @@ public struct Logs {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         let formattedDate = dateFormatter.string(from: timestamp)
+        let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") ?? "Unknown version"
         
-        let logMessage = "\(formattedDate): \(message)\n"
+        let logMessage = "\(version) \(formattedDate): \(message)\n"
         
         if let data = logMessage.data(using: .utf8) {
             if FileManager.default.fileExists(atPath: logURL.path) {
