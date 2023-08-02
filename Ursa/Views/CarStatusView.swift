@@ -16,6 +16,8 @@ struct CarStatusView: View {
             return "в охране"
         case .disarmed:
             return "снято"
+        case .running:
+            return "запуск"
         case .alarm:
             return "тревога"
         case .service:
@@ -32,6 +34,8 @@ struct CarStatusView: View {
             return Color(red: 0.31, green: 1, blue: 0.2)
         case .disarmed:
             return Color(.white)
+        case .running:
+            return (Color(red: 1, green: 0.58, blue: 0.2))
         case .alarm:
             return Color(red: 0.81, green: 0.14, blue: 0.14)
         case .service:
@@ -42,7 +46,7 @@ struct CarStatusView: View {
     }
     var foregroundColor: Color {
         switch status {
-        case .armed, .disarmed, .stayHome, .service:
+        case .armed, .disarmed, .stayHome, .service, .running:
             return Color(.black)
         case .alarm, .unknown:
             return Color(.white)
@@ -65,6 +69,6 @@ struct CarStatusView: View {
 
 struct CarStatusView_Previews: PreviewProvider {
     static var previews: some View {
-        CarStatusView(status: .armed)
+        CarStatusView(status: .unknown)
     }
 }

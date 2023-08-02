@@ -91,6 +91,7 @@ struct Provider: TimelineProvider {
                             fetchedEntry.carData.alarmTriggered = device.state?.alarm
                             fetchedEntry.carData.valetModeOn = device.state?.valet
                             fetchedEntry.carData.stayHomeModeOn = device.state?.stayHome
+                            fetchedEntry.carData.temp = device.common?.moduleTemperature
                             completion(fetchedEntry); return
                         } else {
                             fetchedEntry.carData.alias = "Erroneous data"
@@ -121,7 +122,7 @@ struct WidgetEntryView: View {
             HStack {  // Horizontal flexbox with title & status
                 CarTitleView(content: entry.carData.alias ?? "Неизвестно")
                 Spacer()
-                CarStatusView(status: .armed)
+                CarStatusView(status: entry.carData.state() ?? .unknown)
             }
             .hstackStyle()
             CarMetricView(value: String(entry.carData.remainingDistance ?? 0), description: "км в баке")
@@ -133,7 +134,7 @@ struct WidgetEntryView: View {
                 Spacer()
                 let metrics: [[String]] = [
                     [String(entry.carData.batteryVoltage ?? 0), "вольт"],
-                    [entry.carData.$ignitionPowered, "зажигание"],
+                    [String(entry.carData.temp ?? 0), "градусов"],
                     [entry.carData.perimeter(), "периметр"],
                     [entry.carData.gsmLevelDescription(), "gsm связь"],
                     [entry.carData.$parkingBrakeEngaged, "ручник"],

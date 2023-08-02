@@ -11,6 +11,7 @@ public struct CarData {
     public enum State {
         case armed
         case disarmed
+        case running
         case alarm
         case service
         case stayHome
@@ -31,10 +32,12 @@ public struct CarData {
     public var batteryVoltage: Float? = nil
     public var gsmLevel: Float? = nil
     public var gpsLevel: Float? = nil
+    public var temp: Float? = nil
     
     public func state() -> State? {
         if self.alarmTriggered ?? false { return .alarm }
         if self.valetModeOn ?? false { return .service }
+        if self.ignitionPowered ?? false { return .running }
         if self.stayHomeModeOn ?? false { return .stayHome }
         if let arm = self.isArmed { return arm ? .armed : .disarmed }
         return .unknown
@@ -48,9 +51,9 @@ public struct CarData {
     public func gsmLevelDescription() -> String {
         guard let level = gsmLevel else { return "неизв" }
         switch level {
-            case 0...5: return "плох"
-            case 5...10: return "норм"
-            case 10...15: return "хор"
+            case 0...10: return "плох"
+            case 10...20: return "норм"
+            case 20...30: return "хор"
             default: return "отл"
         }
     }
