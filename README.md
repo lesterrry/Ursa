@@ -1,6 +1,6 @@
 # 🌠 Ursa
 Starline Widget for MacOS\
-Requires a [Constellation](https://github.com/lesterrry/constellation) Swift package which is currently in development
+Depends on [Constellation](https://github.com/lesterrry/constellation) and [KeychainBridge](https://github.com/lesterrry/keychainbridge) Swift packages which are currently in development
 
 
 
