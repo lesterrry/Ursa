@@ -30,9 +30,9 @@ struct Provider: TimelineProvider {
     
     func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
         fetchCar() { data in
-            let distantFuture = Calendar.current.date(byAdding: .year, value: 100, to: Date())!
+            let date = Calendar.current.date(byAdding: .minute, value: 10, to: Date())!
             var entry = data
-            entry.date = distantFuture
+            entry.date = date
             let timeline = Timeline(entries: [entry], policy: .atEnd)
             completion(timeline)
         }
