@@ -9,7 +9,7 @@ import WidgetKit
 import SwiftUI
 import Foundation
 import Constellation
-import os.log
+import KeychainBridge
 
 struct SimpleEntry: TimelineEntry {
     var date: Date
@@ -41,13 +41,14 @@ struct Provider: TimelineProvider {
     
     private func fetchCar(completion: @escaping (SimpleEntry) -> Void) {
         Logs.write("Starting request....")
+        let keychain = Keychain(serviceName: KeychainEntity.serviceName)
         var entry = SimpleEntry(date: Date())
         guard
-            let appId = try? Keychain.getToken(account: KeychainEntity.Account.appId.rawValue),
-            let appSecret = try? Keychain.getToken(account: KeychainEntity.Account.appSecret.rawValue),
-            let userLogin = try? Keychain.getToken(account: KeychainEntity.Account.userLogin.rawValue),
-            let userPassword = try? Keychain.getToken(account: KeychainEntity.Account.userPassword.rawValue),
-            let deviceId = try? Keychain.getToken(account: KeychainEntity.Account.deviceId.rawValue)
+            let appId = try? keychain.getToken(account: KeychainEntity.Account.appId.rawValue),
+            let appSecret = try? keychain.getToken(account: KeychainEntity.Account.appSecret.rawValue),
+            let userLogin = try? keychain.getToken(account: KeychainEntity.Account.userLogin.rawValue),
+            let userPassword = try? keychain.getToken(account: KeychainEntity.Account.userPassword.rawValue),
+            let deviceId = try? keychain.getToken(account: KeychainEntity.Account.deviceId.rawValue)
         else {
             entry.carData.alias = "No Keychain"
             completion(entry); return
@@ -136,7 +137,7 @@ struct WidgetEntryView: View {
                     [String(entry.carData.batteryVoltage ?? 0), "вольт"],
                     [String(entry.carData.temp ?? 0), "градусов"],
                     [entry.carData.perimeter(), "периметр"],
-                    [entry.carData.gsmLevelDescription(), "gsm связь"],
+                    [String(entry.carData.gsmLevel ?? 0), "gsm связь"],
                     [entry.carData.$parkingBrakeEngaged, "ручник"],
                 ]
                 VStack(alignment: .trailing, spacing: 2) {
