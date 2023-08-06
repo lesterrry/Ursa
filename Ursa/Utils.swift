@@ -1,5 +1,5 @@
 //
-//  Logs.swift
+//  Utils.swift
 //  Ursa
 //
 //  Created by aydar.media on 01.08.2023.
@@ -49,6 +49,32 @@ public struct Logs {
                 }
             }
         }
+    }
+}
+
+public struct System {
+    public static func isSleeping() -> Bool {
+        let output = System.shell("ioreg -r -k AppleClamshellState | grep 'No'")
+        
+        print(output)
+
+        return output.contains("\"AppleClamshellState\" = No") == false
+    }
+    private static func shell(_ command: String) -> String {
+        let task = Process()
+        let pipe = Pipe()
+        
+        task.standardOutput = pipe
+        task.arguments = ["-c", command]
+        task.launchPath = "/bin/bash"
+        task.launch()
+
+        let data = pipe.fileHandleForReading.readDataToEndOfFile()
+        let output = String(data: data, encoding: .utf8)
+        
+        task.waitUntilExit()
+        
+        return output ?? ""
     }
 
 }

@@ -41,8 +41,16 @@ struct Provider: TimelineProvider {
     
     private func fetchCar(completion: @escaping (SimpleEntry) -> Void) {
         Logs.write("Starting request....")
-        let keychain = Keychain(serviceName: KeychainEntity.serviceName)
         var entry = SimpleEntry(date: Date())
+        
+        let isSleeping = System.isSleeping()
+        Logs.write("Sleep state: \(isSleeping)")
+        guard !isSleeping else {
+            entry.carData.alias = "Sleeping"
+            completion(entry); return
+        }
+        
+        let keychain = Keychain(serviceName: KeychainEntity.serviceName)
         guard
             let appId = try? keychain.getToken(account: KeychainEntity.Account.appId.rawValue),
             let appSecret = try? keychain.getToken(account: KeychainEntity.Account.appSecret.rawValue),

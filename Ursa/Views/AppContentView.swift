@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  AppContentView.swift
 //  Ursa
 //
 //  Created by aydar.media on 22.07.2023.
@@ -7,13 +7,13 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct AppContentView: View {
     var body: some View {
         VStack {
             Image(systemName: "globe")
                 .imageScale(.large)
                 .foregroundColor(.accentColor)
-            Text("Hello, world!")
+            Text("Hello, Ursa!")
         }
         .padding()
     }
@@ -21,6 +21,6 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        AppContentView()
     }
 }
